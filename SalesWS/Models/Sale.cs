@@ -11,10 +11,15 @@ namespace SalesWS.Models
         }
 
         public long Id { get; set; }
+
         public long ClientId { get; set; }
+        
         public DateTime Date { get; set; }
+        
         public decimal Amount { get; set; }
 
         public virtual ICollection<Concept> Concepts { get; set; }
+        
+        public virtual Client Client { get; set; }
     }
 }

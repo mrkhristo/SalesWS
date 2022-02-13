@@ -19,7 +19,7 @@ namespace SalesWS.Controllers
             {
                 using (Sales_CourseContext context = new Sales_CourseContext())
                 {
-                    response.Data = context.Clients.ToList();
+                    response.Data = context.Clients.OrderByDescending(c=>c.Id).ToList();
                     response.Success = 1;
                 }
             }

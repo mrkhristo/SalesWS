@@ -8,6 +8,6 @@ namespace SalesWS.Models
         public long Id { get; set; }
         public string? Name { get; set; }
 
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }
