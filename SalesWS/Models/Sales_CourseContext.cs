@@ -20,6 +20,7 @@ namespace SalesWS.Models
         public virtual DbSet<Concept> Concepts { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Sale> Sales { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -94,6 +95,20 @@ namespace SalesWS.Models
                 entity.Property(e => e.ClientId).HasColumnName("Client_Id");
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
+
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+                
+                entity.Property(u => u.Id).HasColumnName(@"id");
+                
+                entity.Property(u => u.Email).HasColumnName(@"Email");
+                
+                entity.Property(u => u.Password).HasColumnName(@"Password");
+                
+                entity.Property(u => u.Name).HasColumnName(@"Name");
 
             });
 

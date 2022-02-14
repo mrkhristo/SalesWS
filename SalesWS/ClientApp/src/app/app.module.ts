@@ -15,7 +15,8 @@ import { MatTableModule} from '@angular/material/table';
 import { MatButtonModule} from '@angular/material/button';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule} from '@angular/material/dialog';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogDeleteComponent } from './common/delete/dialog-delete.component';
 
 
 
@@ -25,6 +26,7 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
     HomeComponent,
     ClientComponent,
     DialogClientComponent,
+    DialogDeleteComponent,
   ],
   imports: [
     BrowserModule,

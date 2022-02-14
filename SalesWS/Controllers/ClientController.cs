@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesWS.Models;
 using SalesWS.Models.Response;
@@ -8,13 +9,14 @@ namespace SalesWS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientController : ControllerBase
     {
         [HttpGet]
         [Route("get-all")]
         public IActionResult GetAll()
         {
-            Response response = new Response();
+            ApiResponse response = new ApiResponse();
             try
             {
                 using (Sales_CourseContext context = new Sales_CourseContext())
@@ -34,7 +36,7 @@ namespace SalesWS.Controllers
         [Route("get-by-id/{id}")]
         public IActionResult GetById(long id)
         {
-            Response response = new Response();
+            ApiResponse response = new ApiResponse();
             try
             {
                 using (Sales_CourseContext context = new Sales_CourseContext())
@@ -54,7 +56,7 @@ namespace SalesWS.Controllers
         [Route("add")]
         public IActionResult Add(ClientViewModel model)
         {
-            Response response = new Response();
+            ApiResponse response = new ApiResponse();
             try
             {
                 using (Sales_CourseContext db = new Sales_CourseContext())
@@ -77,7 +79,7 @@ namespace SalesWS.Controllers
         [Route("edit")]
         public IActionResult Edit(ClientViewModel model)
         {
-            Response response = new Response();
+            ApiResponse response = new ApiResponse();
             try
             {
                 using (Sales_CourseContext db = new Sales_CourseContext())
@@ -100,7 +102,7 @@ namespace SalesWS.Controllers
         [Route("delete/{id}")]
         public IActionResult Delete(long id)
         {
-            Response response = new Response();
+            ApiResponse response = new ApiResponse();
             try
             {
                 using (Sales_CourseContext db = new Sales_CourseContext())

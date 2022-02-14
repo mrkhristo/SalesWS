@@ -1,6 +1,6 @@
 ﻿namespace SalesWS.Models.Response
 {
-    public class Response
+    public class ApiResponse
     {
         public int Success { get; set; } = 0;
 
