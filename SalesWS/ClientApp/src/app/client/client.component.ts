@@ -3,6 +3,9 @@ import { ApiclientService } from '../services/apiclient.service';
 import { ApiResponse } from '../models/api-response';
 import { DialogClientComponent } from './dialog/dialog-client.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Client } from '../models/client';
+import { DialogDeleteComponent } from '../common/delete/dialog-delete.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client',
@@ -11,10 +14,13 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ClientComponent implements OnInit {
   public clients: any[] = [];
-  public columns: string[] = ['id', 'name'];
+  public columns: string[] = ['id', 'name','actions'];
+  readonly dialogWidth:string='300px';
+
   constructor(
     private apiClient: ApiclientService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
   ) {
   }
 
@@ -30,11 +36,36 @@ export class ClientComponent implements OnInit {
 
   openAdd() {
     const dialogRef = this.dialog.open(
-      DialogClientComponent, { width: '600' }
+      DialogClientComponent, { width: this.dialogWidth }
     );
     dialogRef.afterClosed().subscribe(result =>{
       this.getClients();
     });
   }
 
+  openEdit(client: Client){
+    const dialogRef = this.dialog.open(
+      DialogClientComponent, { width: this.dialogWidth, data:client}
+    );
+    dialogRef.afterClosed().subscribe(result =>{
+      this.getClients();
+    });
+  }
+
+  deleteClient(client:Client){
+    const dialogRef = this.dialog.open(
+      DialogDeleteComponent, { width: this.dialogWidth}
+    );
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this.apiClient.delete(client.id).subscribe( response =>{
+          if(response.success === 1){
+            this.getClients();
+            this.snackBar.open("Cliente eliminado con exito.", '',
+            { duration: 2000 });
+          }
+        });
+      }
+    });
+  }
 }
